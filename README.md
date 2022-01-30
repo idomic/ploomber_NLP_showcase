@@ -8,3 +8,7 @@ place it in the folder of the model `checkpoint-80344`
 
 and run the server:
 `gunicorn app:app -c ./gunicorn.conf.py -k uvicorn.workers.UvicornWorker`
+
+
+clone the webapp and run `yarn install && yarn start`:
+https://github.com/franz101/reactHN
