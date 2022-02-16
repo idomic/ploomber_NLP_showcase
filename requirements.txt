@@ -8,3 +8,5 @@ pandas
 ploomber
 lxml
 requests
+torch
+torchvision

@@ -9,15 +9,16 @@
 # ---
 
 # %% tags=["soorgeon-imports"]
+import torch
 from datasets import Dataset
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from transformers import AutoTokenizer
 from datasets import load_metric
-import nump as np
+import numpy as np
 from exported import preprocess_function, compute_metrics, softmax, test_interference
 
 # %% tags=["parameters"]
-upstream = None
+upstream = ['get-clean-data']
 product = None
 
 # %% [markdown] tags=[]
@@ -27,8 +28,8 @@ product = None
 metric = load_metric("accuracy")
 
 # %%
-train_dataset = Dataset.from_file("./tmp/train_dataset/dataset.arrow")
-test_dataset  = Dataset.from_file("./tmp/test_dataset/dataset.arrow")
+train_dataset = Dataset.from_file(f"{upstream['get-clean-data']['train_dataset']}/dataset.arrow")
+test_dataset  = Dataset.from_file(f"{upstream['get-clean-data']['test_dataset']}/dataset.arrow")
 num_labels = 41
 
 # %%
