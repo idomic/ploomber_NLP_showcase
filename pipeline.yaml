@@ -1,0 +1,18 @@
+tasks:
+
+- source: tasks/downloading-and-cleaning-data.py
+  name: get-clean-date
+  product:
+    nb: "{{path.products_root}}/downloading-and-cleaning-data.ipynb"
+    train_dataset: "{{path.products_root}}/train_dataset"
+    test_dataset: "{{path.products_root}}/test_dataset"
+
+- source: tasks/training-the-model.py
+  name: train
+  product:
+    nb: "{{path.products_root}}/training-the-model.ipynb"
+
+- source: tasks/interference-of-the-model.py
+  name: inference
+  product:
+    nb: "{{path.products_root}}/interference-of-the-model.ipynb"

@@ -1,3 +1,10 @@
 hackernews-client
 transformers
 datasets
+
+# Auto-generated file, may need manual editing
+numpy
+pandas
+ploomber
+lxml
+requests
