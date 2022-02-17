@@ -10,3 +10,6 @@ lxml
 requests
 torch
 torchvision
+uvicorn[standard]
+gunicorn
+fastapi

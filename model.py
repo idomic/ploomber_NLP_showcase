@@ -3,7 +3,7 @@ from transformers import AutoModelForSequenceClassification
 from transformers import AutoTokenizer
 import numpy as np
 num_labels = 14
-model_checkpoint = f"./checkpoint-80344/"
+model_checkpoint = f"./output/finetuned/best-model/"
 
 
 def softmax(_outputs):
