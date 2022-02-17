@@ -12,20 +12,24 @@
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from transformers import AutoTokenizer
 import numpy as np
+import json
 from exported import preprocess_function, compute_metrics, softmax, test_interference
 
 # %% tags=["parameters"]
-upstream = ['train']
+upstream = ['get-clean-data', 'train']
 product = None
 
 # %% [markdown] tags=[]
 # ## Interference of the model
 
 # %%
-num_labels = 41
+# num_labels = 41
+with open(upstream['get-clean-data']['params']) as f:
+   labels = json.load(f)
+num_labels = labels['num_labels']
 
 # %%
-best_model = f"./finetuned/best-model/"
+best_model = f"{upstream['train']['models']}/best-model/"
 
 tokenizer = AutoTokenizer.from_pretrained(best_model, use_fast=True)
 

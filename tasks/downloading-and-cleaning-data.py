@@ -12,6 +12,7 @@
 import pandas as pd
 from datasets import load_dataset
 from datasets import Dataset
+import json
 from exported import preprocess_function, compute_metrics, softmax, test_interference
 
 # %% tags=["parameters"]
@@ -35,24 +36,35 @@ num_labels = len(set(dataset["train"]["category_num"]))
 
 # %%
 reduced_categories = {
-  "CULTURE & ARTS":["ARTS","ARTS & CULTURE","CULTURE & ARTS"],
- "BUSINESS": ["BUSINESS","MONEY"],
- "EDUCATION": ["EDUCATION","COLLEGE"],
- "COMEDY & ENTERTAINMENT" : ["COMEDY","ENTERTAINMENT","MEDIA"],
- "HEALTH & LIVING": ["WELLNESS","HEALTHY LIVING",
-                     "STYLE & BEAUTY","HOME & LIVING",
-                     "PARENTS","STYLE","FOOD & DRINK","TASTE","PARENTING","DIVORCE","WEDDINGS"],
- "RELIGION" : ["RELIGION"],
- "POLITICS" : ["POLITICS","BLACK VOICES","LATINO VOICES","QUEER VOICES","WOMEN"],
- "SPORTS" : ["SPORTS"],
- "TRAVEL" : ["TRAVEL"],
- "NEWS" :["GOOD NEWS","THE WORLDPOST","WORLDPOST","WORLD NEWS","WEIRD NEWS","CRIME"],
- "ENVIRONMENT" : ["GREEN","ENVIRONMENT"],
- "SCIENCE": ["SCIENCE"],
- "TECH": ["TECH"],
- "OTHER" : ["IMPACT","FIFTY"]
- }
+    "CULTURE & ARTS": ["ARTS", "ARTS & CULTURE", "CULTURE & ARTS",
+                       "COMEDY", "ENTERTAINMENT", "MEDIA"],
+    "EDUCATION": ["EDUCATION", "COLLEGE"],
+    "BUSINESS": ["BUSINESS", "MONEY"],
+    "HEALTH & LIVING": ["WELLNESS", "HEALTHY LIVING", "TRAVEL", "IMPACT",
+                        "FIFTY",
+                        "STYLE & BEAUTY", "HOME & LIVING", "GREEN",
+                        "PARENTS", "STYLE", "FOOD & DRINK", "TASTE",
+                        "PARENTING", "DIVORCE", "WEDDINGS"],
+    "SPORTS": ["SPORTS"],
+    "NEWS & POLITICS": ["POLITICS", "BLACK VOICES", "LATINO VOICES",
+                        "QUEER VOICES", "WOMEN", "RELIGION"] + ["GOOD NEWS",
+                                                                "THE WORLDPOST",
+                                                                "WORLDPOST",
+                                                                "WORLD NEWS",
+                                                                "WEIRD NEWS",
+                                                                "CRIME"],
+    "TECH & SCIENCE": ["SCIENCE", "ENVIRONMENT", "TECH"]
+}
 
+label_map = {}
+for i, cats in enumerate(reduced_categories.values()):
+    for cat in cats:
+        label_map[cat] = i
+
+# %%
+num_labels = len(reduced_categories.values())
+with open(product['params'], 'w') as f:
+    json.dump({'num_labels': num_labels}, f)
 
 
 # %%

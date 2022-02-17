@@ -6,11 +6,13 @@ tasks:
     nb: "{{path.products_root}}/downloading-and-cleaning-data.ipynb"
     train_dataset: "{{path.products_root}}/train_dataset"
     test_dataset: "{{path.products_root}}/test_dataset"
+    params: "{{path.products_root}}/labels.json"
 
 - source: tasks/training-the-model.py
   name: train
   product:
     nb: "{{path.products_root}}/training-the-model.ipynb"
+    models: "{{path.products_root}}/finetuned"
 
 - source: tasks/interference-of-the-model.py
   name: interference

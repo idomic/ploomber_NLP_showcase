@@ -12,7 +12,6 @@ def compute_metrics(eval_pred, metric):
     predictions = np.argmax(predictions, axis=1)
     return metric.compute(predictions=predictions, references=labels)
 
-
 #source: https://github.com/huggingface/transformers/blob/master/src/transformers/pipelines/text_classification.py
 def softmax(_outputs):
     maxes = np.max(_outputs, axis=-1, keepdims=True)
